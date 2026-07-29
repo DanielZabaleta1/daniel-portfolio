@@ -33,7 +33,7 @@ body {
 a { color: inherit; text-decoration: none; }
 p { margin: 0; }
 h1, h2, h3 { margin: 0; letter-spacing: -0.025em; line-height: 1.1; font-weight: 800; text-wrap: balance; }
-a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid var(--blue-lt); outline-offset: 3px; }
+a:focus-visible, button:focus-visible, input:focus-visible, [role="button"]:focus-visible { outline: 2px solid var(--blue-lt); outline-offset: 3px; }
 .num { font-variant-numeric: tabular-nums; }
 
 .glass {

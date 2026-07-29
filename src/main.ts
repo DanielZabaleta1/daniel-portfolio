@@ -253,10 +253,14 @@ if (!reduceMotion && 'IntersectionObserver' in window) {
 }
 
 // --- dot grid background + cursor parallax ---
+// Skipped on touch/coarse-pointer devices: the effect is driven entirely by
+// mousemove, so it's dead weight (a 60fps rAF loop over hundreds of dots)
+// on phones that can never trigger it.
 const canvas = document.getElementById('bg-canvas') as HTMLCanvasElement | null;
 const ctx = canvas?.getContext('2d') ?? null;
+const isCoarsePointer = window.matchMedia('(pointer: coarse)').matches;
 
-if (canvas && ctx && !reduceMotion) {
+if (canvas && ctx && !reduceMotion && !isCoarsePointer) {
   let dots: { x: number; y: number }[] = [];
   let w = 0;
   let h = 0;
