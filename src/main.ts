@@ -27,6 +27,74 @@ chips.forEach((chip) => {
   });
 });
 
+// --- clickable project cards (built projects only; "In progress" cards opt out via not-built) ---
+document.querySelectorAll<HTMLElement>('.proj[data-href]').forEach((card) => {
+  card.addEventListener('click', (e) => {
+    if ((e.target as HTMLElement).closest('a')) return;
+    const href = card.dataset.href;
+    if (href) window.open(href, '_blank', 'noopener');
+  });
+});
+
+// --- VSL (intro video) ---
+// Empty VITE_VSL_URL keeps the inert "coming soon" placeholder from Phase 2.
+// Once set, the play button loads the embed on click (no third-party iframe
+// weight until the visitor actually asks for it).
+function toEmbedUrl(rawUrl: string): string | null {
+  let u: URL;
+  try {
+    u = new URL(rawUrl);
+  } catch {
+    return null;
+  }
+  if (u.hostname.includes('youtube.com')) {
+    if (u.pathname.startsWith('/embed/')) return rawUrl;
+    const id = u.searchParams.get('v');
+    return id ? `https://www.youtube.com/embed/${id}` : null;
+  }
+  if (u.hostname === 'youtu.be') {
+    const id = u.pathname.slice(1);
+    return id ? `https://www.youtube.com/embed/${id}` : null;
+  }
+  if (u.hostname.includes('vimeo.com')) {
+    if (u.hostname.startsWith('player.')) return rawUrl;
+    const id = u.pathname.split('/').filter(Boolean).pop();
+    return id ? `https://player.vimeo.com/video/${id}` : null;
+  }
+  return null;
+}
+
+const vslUrl = (import.meta.env.VITE_VSL_URL ?? '').trim();
+const vslEmbedUrl = vslUrl ? toEmbedUrl(vslUrl) : null;
+const vslBadge = document.getElementById('vsl-badge');
+const vslPlay = document.getElementById('vsl-play');
+const vslBody = vslPlay?.parentElement ?? null;
+
+if (vslEmbedUrl && vslBadge && vslPlay && vslBody) {
+  vslBadge.textContent = 'live';
+  vslBadge.classList.add('is-live');
+  vslPlay.removeAttribute('aria-disabled');
+
+  const playVsl = () => {
+    const iframe = document.createElement('iframe');
+    iframe.src = `${vslEmbedUrl}${vslEmbedUrl.includes('?') ? '&' : '?'}autoplay=1`;
+    iframe.title = 'Daniel Zabaleta — intro video';
+    iframe.allow = 'autoplay; fullscreen; picture-in-picture';
+    iframe.style.width = '100%';
+    iframe.style.height = '100%';
+    iframe.style.border = '0';
+    vslBody.replaceChildren(iframe);
+  };
+
+  vslPlay.addEventListener('click', playVsl);
+  vslPlay.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      playVsl();
+    }
+  });
+}
+
 // --- the wall ---
 // Backed by /api/comments (Vercel KV) when configured; falls back to
 // localStorage (like the Phase 2 demo) if the API isn't available, so the
