@@ -2,6 +2,8 @@
 
 Personal portfolio site: VSL funnel + selected work. Built with Vite + TypeScript, deployed on Vercel.
 
+**Live:** https://daniel-portfolio-sooty.vercel.app/
+
 ## Stack
 - Vite + vanilla TypeScript (no framework — single static page, small bundle)
 - Self-hosted [Inter](https://rsms.me/inter/) via `@fontsource/inter`
@@ -36,4 +38,8 @@ To remove a comment:
    `<ADMIN_TOKEN>` is the value you set for the `ADMIN_TOKEN` environment variable in the Vercel project. Without a matching token the endpoint returns 401.
 
 ## Status
-Phase 3 done — the wall is live-backed. VSL wiring and real project links land in Phase 4. See `pasos_daniel.md` in the Personal Tracking repo for steps that require manual action.
+All 5 build phases done and deployed. Still pending (all manual, tracked in `pasos_daniel.md` in the Personal Tracking repo):
+- Connect a Vercel KV store so the wall persists across visitors (works fine without it, just falls back to per-browser localStorage)
+- Set `ADMIN_TOKEN` for wall moderation
+- Record the VSL and set `VITE_VSL_URL`
+- Update Lead Triage Engine / Portfolio Command from "In progress" once built (search `not-built` in `index.html`)
