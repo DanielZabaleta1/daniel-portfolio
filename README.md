@@ -2,7 +2,7 @@
 
 Personal portfolio site: VSL funnel + selected work. Built with Vite + TypeScript, deployed on Vercel.
 
-**Live:** https://daniel-portfolio-sooty.vercel.app/
+**Live:** https://daniel-zabaleta-portfolio.vercel.app/
 
 ## Stack
 - Vite + vanilla TypeScript (no framework — single static page, small bundle)
