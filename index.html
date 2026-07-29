@@ -6,7 +6,164 @@
     <title>Daniel Zabaleta — Portfolio</title>
   </head>
   <body>
-    <div id="app"></div>
+    <canvas id="bg-canvas"></canvas>
+    <div class="glow"></div>
+
+    <nav class="glass">
+      <span class="mark">Daniel<b>Zabaleta</b><span class="dot"></span></span>
+      <span class="links">
+        <a href="#work">Work</a>
+        <a href="#how">Method</a>
+        <a href="#beyond">Off-clock</a>
+        <a href="#contact" class="btn btn-primary sm">Get in touch</a>
+      </span>
+    </nav>
+
+    <div class="wrap">
+
+      <!-- HERO -->
+      <section class="hero">
+        <div class="eyebrow"><span class="dot">●</span> Business Analyst · Solution Architect · Automation</div>
+        <h1>I design automation and systems that make manual work run itself.</h1>
+        <p class="lead">Turning messy, manual operations into something you can measure, predict, and improve.</p>
+        <div class="cta-row">
+          <a href="#work" class="btn btn-primary">See the work →</a>
+          <a href="#contact" class="btn btn-ghost">Connect on LinkedIn</a>
+        </div>
+        <div class="vsl glass">
+          <div class="ph"><span class="t">Intro</span><span class="live" id="vsl-badge">coming soon</span></div>
+          <div class="body">
+            <div class="play" id="vsl-play" role="button" aria-label="Play intro video" tabindex="0" aria-disabled="true"></div>
+          </div>
+        </div>
+        <div class="kpis">
+          <div class="glass kpi reveal"><div class="v num">5<small> yrs</small></div><div class="k">Enterprise automation</div><div class="delta"><b>↑</b> real production systems</div></div>
+          <div class="glass kpi reveal"><div class="v num">4</div><div class="k">Portfolio projects</div><div class="delta">one per role</div></div>
+          <div class="glass kpi reveal"><div class="v num">1<small> rule</small></div><div class="k">Human-checked</div><div class="delta">nothing ships unreviewed</div></div>
+          <div class="glass kpi reveal"><div class="v num">63<small>%</small></div><div class="k">Productivity gain*</div><div class="delta"><b>↑</b> Kroger automation</div></div>
+        </div>
+      </section>
+
+      <!-- WHO -->
+      <section class="who">
+        <div class="sec-center reveal"><div class="eyebrow">Who I am</div></div>
+        <p class="big reveal">Five years turning manual, error-prone operations into automated systems. What I care about most is understanding <span class="ac">where a team is trying to go</span>, then finding the cleanest way to help it get there.</p>
+      </section>
+
+      <!-- WORK -->
+      <section id="work">
+        <div class="sec-center">
+          <div class="eyebrow reveal">The work</div>
+          <h2 class="section-title reveal" style="margin:12px 0 6px;">Selected work</h2>
+          <p class="reveal" style="color:var(--ink-2); margin-bottom:22px;">Filter by the role you're hiring for.</p>
+          <div class="filters reveal">
+            <button class="chip active" data-filter="all">All</button>
+            <button class="chip" data-filter="ba">Business Analyst</button>
+            <button class="chip" data-filter="sa">Solution Architect</button>
+            <button class="chip" data-filter="pd">Product</button>
+            <button class="chip" data-filter="pm">Project Manager</button>
+          </div>
+        </div>
+        <div class="grid" id="grid">
+          <article class="glass proj reveal" data-roles="sa">
+            <div class="top"><div class="roles"><span class="rt">Solution Architect</span></div><div class="stat"><div class="n num">6</div><div class="l">workflows</div></div></div>
+            <h3>Power Flow OS</h3>
+            <p>An outreach operating system designed end to end: workflow engine, database, AI drafting, and a custom CRM, on one source of truth. Running in production.</p>
+            <span class="go">View case study <span class="arr">→</span></span>
+          </article>
+          <article class="glass proj reveal" data-roles="ba pd">
+            <div class="top"><div class="roles"><span class="rt">Business Analyst</span><span class="rt">Product</span></div><div class="stat"><div class="n num">4</div><div class="l">safety layers</div></div></div>
+            <h3>Ask Your Data</h3>
+            <p>A non-technical team asks a question in plain English and gets a real answer from the database, behind four layers of safety.</p>
+            <span class="go">Open live demo <span class="arr">→</span></span>
+          </article>
+          <article class="glass proj reveal" data-roles="pd">
+            <div class="top"><div class="roles"><span class="rt">Product</span></div><div class="stat"><div class="n num">3</div><div class="l">priority tiers</div></div></div>
+            <h3>Lead Triage Engine</h3>
+            <p>Prioritizes work and explains its reasoning. Rules for the clear cases, AI for the ambiguous ones, changeable without a developer.</p>
+            <span class="go">View case study <span class="arr">→</span></span>
+          </article>
+          <article class="glass proj reveal" data-roles="pm">
+            <div class="top"><div class="roles"><span class="rt">Project Manager</span></div><div class="stat"><div class="n num">$0</div><div class="l">vs premium</div></div></div>
+            <h3>Portfolio Command</h3>
+            <p>Cross-project delivery visibility that usually costs a premium license: velocity, risk, and workload across every project at once.</p>
+            <span class="go">View case study <span class="arr">→</span></span>
+          </article>
+        </div>
+      </section>
+
+      <!-- METHOD -->
+      <section id="how">
+        <div class="sec-center">
+          <div class="eyebrow reveal">Method</div>
+          <h2 class="section-title reveal" style="margin-top:12px;">I fit my role around your goal.</h2>
+        </div>
+        <div class="how-grid">
+          <div class="glass step reveal"><div class="n">01 · VISION FIRST</div><h3>Understand the goal</h3><p>Before touching a single process, I get clear on where your team or project is trying to go. Everything I build fits around that.</p></div>
+          <div class="glass step reveal"><div class="n">02 · YOUR CALL</div><h3>Options, not orders</h3><p>I map out the paths I can see and lay them out with an honest recommendation. The final decision stays yours.</p></div>
+          <div class="glass step reveal"><div class="n">03 · TOGETHER</div><h3>Part of the team</h3><p>I work inside your vision, not from outside it. Most teams are sitting on more potential than they realize.</p></div>
+        </div>
+      </section>
+
+      <!-- BEYOND -->
+      <section id="beyond">
+        <div class="sec-center">
+          <div class="eyebrow reveal">Off the clock</div>
+          <h2 class="section-title reveal" style="margin-top:12px;">A little of who I am.</h2>
+        </div>
+        <div class="beyond-grid">
+          <div class="glass b-item reveal">
+            <div class="ico"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="17.6,15.9 16.1,14.4 24.1,6.5 25.5,7.9"/><polygon points="26.2,8.7 23.3,5.8 27.7,2.9 29.1,4.3"/><polyline points="17.7,11.4 3.1,15.9 12.5,19.5 16.1,28.9 20.6,14.3"/><line x1="13.2" y1="15.9" x2="16.1" y2="18.8"/></svg></div>
+            <h4>Guitar</h4><p>Where I switch the analytical brain off.</p>
+          </div>
+          <div class="glass b-item reveal">
+            <div class="ico"><svg viewBox="0 0 32 32" fill="none"><path d="M17 11.0009V21.0009C17 22.1049 17.896 23.0009 19 23.0009H21C22.104 23.0009 23 22.1049 23 21.0009V11.0009C23 9.89687 22.104 9.00087 21 9.00087H19C17.896 9.00087 17 9.89687 17 11.0009ZM17 11.0009C17 9.89687 16.104 9.00087 15 9.00087H13C11.896 9.00087 11 9.89687 11 11.0009V14.0009M9.6191 6.98137L8.8731 2.64637C8.6831 1.56237 7.6571 0.838368 6.5801 1.03037L4.6311 1.37637C3.5541 1.56737 2.8361 2.60137 3.0241 3.68437L5.3571 17.0014M24.3701 7.01457L25.1201 2.64657C25.3081 1.56257 26.3351 0.838568 27.4111 1.03057L29.3591 1.37557C30.4351 1.56757 31.1521 2.60157 30.9641 3.68457L28.0001 20.0006V27.0006C28.0001 29.3336 26.3331 31.0006 24.0001 31.0006H9.0001C4.0001 31.0006 1.0001 28.9586 1.0001 23.0006V18.0006C1.0001 17.4486 1.4471 17.0006 2.0001 17.0006H16.0001C16.5311 17.0006 17.0001 17.4386 17.0001 18.0006V19.0006C17.0001 21.3446 15.3441 23.0006 13.0001 23.0006H7.0001" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <h4>Rock</h4><p>The energy behind the late nights.</p>
+          </div>
+          <div class="glass b-item reveal">
+            <div class="ico"><svg viewBox="0 0 1024 1024" fill="currentColor"><path d="M957.442 547.84h56.32c11.311 0 20.48-9.169 20.48-20.48s-9.169-20.48-20.48-20.48h-56.32c-11.311 0-20.48 9.169-20.48 20.48s9.169 20.48 20.48 20.48zm-630.79 0h389.13c11.311 0 20.48-9.169 20.48-20.48s-9.169-20.48-20.48-20.48h-389.13c-11.311 0-20.48 9.169-20.48 20.48s9.169 20.48 20.48 20.48zm-295.932 0h56.32c11.311 0 20.48-9.169 20.48-20.48s-9.169-20.48-20.48-20.48H30.72c-11.311 0-20.48 9.169-20.48 20.48s9.169 20.48 20.48 20.48z"/><path d="M788.48 788.48c-39.471 0-71.68-32.209-71.68-71.68V337.92c0-39.471 32.209-71.68 71.68-71.68s71.68 32.209 71.68 71.68V716.8c0 39.471-32.209 71.68-71.68 71.68zm0-40.96c16.849 0 30.72-13.871 30.72-30.72V337.92c0-16.849-13.871-30.72-30.72-30.72s-30.72 13.871-30.72 30.72V716.8c0 16.849 13.871 30.72 30.72 30.72z"/><path d="M890.88 650.24c-39.471 0-71.68-32.209-71.68-71.68v-102.4c0-39.471 32.209-71.68 71.68-71.68s71.68 32.209 71.68 71.68v102.4c0 39.471-32.209 71.68-71.68 71.68zm0-40.96c16.849 0 30.72-13.871 30.72-30.72v-102.4c0-16.849-13.871-30.72-30.72-30.72s-30.72 13.871-30.72 30.72v102.4c0 16.849 13.871 30.72 30.72 30.72zM256 747.52c16.849 0 30.72-13.871 30.72-30.72V337.92c0-16.849-13.871-30.72-30.72-30.72s-30.72 13.871-30.72 30.72V716.8c0 16.849 13.871 30.72 30.72 30.72zm0 40.96c-39.471 0-71.68-32.209-71.68-71.68V337.92c0-39.471 32.209-71.68 71.68-71.68s71.68 32.209 71.68 71.68V716.8c0 39.471-32.209 71.68-71.68 71.68z"/><path d="M153.6 609.28c16.849 0 30.72-13.871 30.72-30.72v-102.4c0-16.849-13.871-30.72-30.72-30.72s-30.72 13.871-30.72 30.72v102.4c0 16.849 13.871 30.72 30.72 30.72zm0 40.96c-39.471 0-71.68-32.209-71.68-71.68v-102.4c0-39.471 32.209-71.68 71.68-71.68s71.68 32.209 71.68 71.68v102.4c0 39.471-32.209 71.68-71.68 71.68z"/></svg></div>
+            <h4>The gym</h4><p>Discipline I can measure.</p>
+          </div>
+          <div class="glass b-item reveal">
+            <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M19.64,1.52H4.36A2.87,2.87,0,1,0,7.05,5.34H17a2.86,2.86,0,1,0,2.69-3.82Z"/><line x1="16.94" y1="5.34" x2="7.06" y2="5.34"/><line x1="17.73" y1="23.48" x2="17.73" y2="6.51"/><line x1="6.27" y1="23.48" x2="6.27" y2="6.51"/><line x1="10.09" y1="9.16" x2="10.09" y2="23.48"/><line x1="13.91" y1="9.16" x2="13.91" y2="23.48"/></svg></div>
+            <h4>Philosophy</h4><p>Understanding why, not just that.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- WALL -->
+      <section id="wall">
+        <div class="sec-center">
+          <div class="eyebrow reveal">The wall · anonymous</div>
+          <h2 class="section-title reveal" style="margin-top:12px;">Leave your mark.</h2>
+        </div>
+        <div class="glass wall-panel reveal">
+          <div class="wall-form">
+            <input id="wall-input" type="text" maxlength="80" placeholder="Say something nice…" aria-label="Your comment">
+            <button class="btn btn-primary" id="wall-post">Post</button>
+          </div>
+          <p id="wall-error" role="alert" style="display:none; color:#ff8a8a; font-size:12.5px; margin-bottom:14px;"></p>
+          <div class="wall-comments" id="wall-comments"></div>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section id="contact" class="contact">
+        <div class="glass panel reveal">
+          <div class="eyebrow" style="margin-bottom:14px;">Get in touch</div>
+          <h2>Let's <span class="ac">connect.</span></h2>
+          <p class="lead">The easiest place to reach me is LinkedIn. If any of the work made you think "I'd want this person on the team," I'd be glad to talk.</p>
+          <a href="https://www.linkedin.com/in/danielmarcelozabaletacruz/" target="_blank" rel="noopener" class="btn btn-primary">Connect on LinkedIn →</a>
+          <div class="socials">
+            <a href="https://github.com/DanielZabaleta1" target="_blank" rel="noopener">GitHub</a>
+            <a href="mailto:daniel@runpowerflow.com">daniel@runpowerflow.com</a>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <footer>Daniel Zabaleta · Built with systems in mind · 2026 · *productivity figures from real WU projects</footer>
+
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
