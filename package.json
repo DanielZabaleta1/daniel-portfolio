@@ -6,13 +6,16 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "typecheck:api": "tsc -p api/tsconfig.json --noEmit"
   },
   "devDependencies": {
+    "@vercel/node": "^5.9.0",
     "typescript": "~6.0.2",
     "vite": "^8.1.1"
   },
   "dependencies": {
-    "@fontsource/inter": "^5.3.0"
+    "@fontsource/inter": "^5.3.0",
+    "@upstash/redis": "^1.38.0"
   }
 }

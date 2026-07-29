@@ -27,8 +27,11 @@ chips.forEach((chip) => {
   });
 });
 
-// --- the wall (localStorage demo; replaced by /api/comments in Phase 3) ---
-type Comment = { t: string };
+// --- the wall ---
+// Backed by /api/comments (Vercel KV) when configured; falls back to
+// localStorage (like the Phase 2 demo) if the API isn't available, so the
+// build and the page never break just because KV hasn't been set up yet.
+type Comment = { id?: string; t: string };
 
 const WALL_KEY = 'dz_wall_pf';
 const seedComments: Comment[] = [
@@ -40,13 +43,17 @@ const seedComments: Comment[] = [
 
 const wallBox = document.getElementById('wall-comments');
 const wallInput = document.getElementById('wall-input') as HTMLInputElement | null;
+const wallPostBtn = document.getElementById('wall-post') as HTMLButtonElement | null;
 const wallError = document.getElementById('wall-error');
 
 const URL_PATTERN = /(https?:\/\/|www\.)/i;
 const DOMAIN_PATTERN = /\b[a-z0-9-]+\.(com|net|org|io|co|dev|app|me|ai|gg|xyz|info)\b/i;
 const containsUrl = (s: string) => URL_PATTERN.test(s) || DOMAIN_PATTERN.test(s);
 
-function loadComments(): Comment[] {
+let serverMode = false;
+let comments: Comment[] = [];
+
+function loadLocalComments(): Comment[] {
   try {
     const raw = localStorage.getItem(WALL_KEY);
     return raw ? (JSON.parse(raw) as Comment[]) : seedComments;
@@ -55,22 +62,20 @@ function loadComments(): Comment[] {
   }
 }
 
-function renderComments(list: Comment[]) {
+function renderComments(list: Comment[], newestFirst: boolean) {
   if (!wallBox) return;
   wallBox.innerHTML = '';
-  list
-    .slice()
-    .reverse()
-    .forEach((c) => {
-      const el = document.createElement('div');
-      el.className = 'cmt';
-      el.textContent = c.t;
-      const who = document.createElement('span');
-      who.className = 'who';
-      who.textContent = 'Anonymous';
-      el.appendChild(who);
-      wallBox.appendChild(el);
-    });
+  const ordered = newestFirst ? list : list.slice().reverse();
+  ordered.forEach((c) => {
+    const el = document.createElement('div');
+    el.className = 'cmt';
+    el.textContent = c.t;
+    const who = document.createElement('span');
+    who.className = 'who';
+    who.textContent = 'Anonymous';
+    el.appendChild(who);
+    wallBox.appendChild(el);
+  });
 }
 
 function showWallError(message: string) {
@@ -79,10 +84,27 @@ function showWallError(message: string) {
   wallError.style.display = message ? 'block' : 'none';
 }
 
-let comments = loadComments();
-renderComments(comments);
+async function initWall() {
+  try {
+    const res = await fetch('/api/comments');
+    if (res.ok) {
+      const data = await res.json();
+      if (Array.isArray(data.comments)) {
+        serverMode = true;
+        comments = data.comments;
+        renderComments(comments, true);
+        return;
+      }
+    }
+  } catch {
+    // network error / API not deployed yet — fall through to local mode
+  }
+  serverMode = false;
+  comments = loadLocalComments();
+  renderComments(comments, false);
+}
 
-function postComment() {
+async function postComment() {
   const value = wallInput?.value.trim() ?? '';
   if (!value) {
     showWallError('Say something first.');
@@ -97,13 +119,43 @@ function postComment() {
     return;
   }
   showWallError('');
+
+  if (serverMode) {
+    if (wallPostBtn) wallPostBtn.disabled = true;
+    try {
+      const res = await fetch('/api/comments', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text: value }),
+      });
+      if (res.status === 429) {
+        showWallError('Slow down a bit — try again in a few seconds.');
+        return;
+      }
+      if (!res.ok) {
+        showWallError('Could not post right now — try again.');
+        return;
+      }
+      const data = await res.json();
+      comments = [data.comment, ...comments];
+      renderComments(comments, true);
+      if (wallInput) wallInput.value = '';
+    } catch {
+      showWallError('Could not post right now — try again.');
+    } finally {
+      if (wallPostBtn) wallPostBtn.disabled = false;
+    }
+    return;
+  }
+
   comments.push({ t: value });
   localStorage.setItem(WALL_KEY, JSON.stringify(comments));
-  renderComments(comments);
+  renderComments(comments, false);
   if (wallInput) wallInput.value = '';
 }
 
-document.getElementById('wall-post')?.addEventListener('click', postComment);
+initWall();
+wallPostBtn?.addEventListener('click', postComment);
 wallInput?.addEventListener('keydown', (e) => {
   if (e.key === 'Enter') postComment();
 });
