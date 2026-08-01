@@ -72,7 +72,7 @@ const vslPlay = document.getElementById('vsl-play');
 const vslBody = vslPlay?.parentElement ?? null;
 
 if (vslEmbedUrl && vslBadge && vslPlay && vslBody) {
-  vslBadge.textContent = vslDuration ? `live · ${vslDuration}` : 'live';
+  vslBadge.textContent = vslDuration;
   vslBadge.classList.add('is-live');
   vslPlay.removeAttribute('aria-disabled');
 
