@@ -92,7 +92,14 @@ section { padding: 78px 0; }
 .vsl .ph .live.is-live { color: var(--up); }
 .vsl .ph .live::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--ink-3); }
 .vsl .ph .live.is-live::before { background: var(--up); box-shadow: 0 0 8px var(--up); }
-.vsl .body { aspect-ratio: 16/9; display: grid; place-items: center; background: linear-gradient(160deg, rgba(37,99,235,.16), rgba(255,255,255,.03)); }
+.vsl .body {
+  aspect-ratio: 16/9;
+  display: grid;
+  place-items: center;
+  background:
+    linear-gradient(160deg, rgba(37,99,235,.38), rgba(7,7,14,.62)),
+    url('/vsl-thumbnail.jpg') center/cover no-repeat;
+}
 .vsl .body .play { width: 72px; height: 72px; border-radius: 50%; background: var(--blue); display: grid; place-items: center; cursor: pointer; box-shadow: 0 10px 40px var(--blue-glow); transition: transform .22s var(--ease), opacity .22s var(--ease); }
 .vsl .body .play::after { content: ""; border-left: 19px solid #fff; border-top: 12px solid transparent; border-bottom: 12px solid transparent; margin-left: 5px; }
 .vsl .body .play:hover { transform: scale(1.07); }

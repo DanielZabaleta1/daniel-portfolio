@@ -65,13 +65,14 @@ function toEmbedUrl(rawUrl: string): string | null {
 }
 
 const vslUrl = (import.meta.env.VITE_VSL_URL ?? '').trim();
+const vslDuration = (import.meta.env.VITE_VSL_DURATION ?? '').trim();
 const vslEmbedUrl = vslUrl ? toEmbedUrl(vslUrl) : null;
 const vslBadge = document.getElementById('vsl-badge');
 const vslPlay = document.getElementById('vsl-play');
 const vslBody = vslPlay?.parentElement ?? null;
 
 if (vslEmbedUrl && vslBadge && vslPlay && vslBody) {
-  vslBadge.textContent = 'live';
+  vslBadge.textContent = vslDuration ? `live · ${vslDuration}` : 'live';
   vslBadge.classList.add('is-live');
   vslPlay.removeAttribute('aria-disabled');
 
