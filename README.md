@@ -42,4 +42,4 @@ All 5 build phases done and deployed. Still pending (all manual, tracked in `pas
 - Connect a Vercel KV store so the wall persists across visitors (works fine without it, just falls back to per-browser localStorage)
 - Set `ADMIN_TOKEN` for wall moderation
 - Record the VSL and set `VITE_VSL_URL`
-- Update Lead Triage Engine / Portfolio Command from "In progress" once built (search `not-built` in `index.html`)
+- Lead Triage Engine card updated to live demo + GitHub (2026-09-14) — Portfolio Command still "In progress" until Project 4's Power BI work is done
